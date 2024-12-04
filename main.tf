@@ -130,7 +130,7 @@ resource "aws_key_pair" "clo835_key_pair" {
 # Optional EC2 Instance (if needed)
 resource "aws_instance" "app_server" {
   ami                    = "ami-0cff7528ff583bf9a"
-  instance_type          = "t2.micro"
+  instance_type          = "t2.medium"
   key_name               = aws_key_pair.clo835_key_pair.key_name
   vpc_security_group_ids = [aws_security_group.allow_web.id]
   subnet_id              = aws_subnet.public_1.id
