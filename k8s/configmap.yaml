@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: final
+data:
+  backgroundImageUrl: "https://clo835-final-project-background-images-6sjb7p9x.s3.us-east-1.amazonaws.com/demo.png"
+  yourName: "SkB"

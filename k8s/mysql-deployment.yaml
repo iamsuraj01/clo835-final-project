@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: final
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      imagePullSecrets:
+        - name: ecr-secret  # Name of the secret you created
+      containers:
+        - name: mysql
+          image: 345771349539.dkr.ecr.us-east-1.amazonaws.com/mysql-repo:5.7  # ECR image
+          envFrom:
+            - secretRef:
+                name: mysql-credentials
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-pvc
