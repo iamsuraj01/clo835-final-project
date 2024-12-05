@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+  namespace: final
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      imagePullSecrets:
+        - name: ecr-secret  # Secret for ECR authentication
+      containers:
+        - name: flask-app
+          image: 345771349539.dkr.ecr.us-east-1.amazonaws.com/clo835-final-project-webapp:latest  # ECR image
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DBHOST
+              value: "mysql-service.final.svc.cluster.local"  
+            - name: DBUSER
+              value: "root"  
+            - name: DBPORT
+              value: "3306"  
+            - name: DBPWD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret  
+                  key: MYSQL_ROOT_PASSWORD  
+            - name: DATABASE
+              value: "employees"  
