@@ -14,12 +14,12 @@ spec:
         app: flask-app
     spec:
       imagePullSecrets:
-        - name: ecr-secret  # Secret for ECR authentication
+        - name: ecr-secret
       containers:
         - name: flask-app
-          image: 345771349539.dkr.ecr.us-east-1.amazonaws.com/clo835-final-project-webapp:latest  # ECR image
+          image: 903150814166.dkr.ecr.us-east-1.amazonaws.com/clo835-final-project-webapp:latest  # ECR image
           ports:
-            - containerPort: 5000
+          - containerPort: 81
           env:
             - name: DBHOST
               value: "mysql-service.final.svc.cluster.local"  
@@ -33,4 +33,23 @@ spec:
                   name: mysql-secret  
                   key: MYSQL_ROOT_PASSWORD  
             - name: DATABASE
-              value: "employees"  
+              value: "employees"
+            # S3 and Developer Configuration from ConfigMap
+            - name: S3_BUCKET_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: S3_BUCKET_NAME
+            - name: BACKGROUND_IMAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: BACKGROUND_IMAGE
+            - name: DEVELOPER_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DEVELOPER_NAME
+            # AWS Region for S3 access
+            - name: AWS_REGION
+              value: "us-east-1"

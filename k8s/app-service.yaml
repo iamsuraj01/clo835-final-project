@@ -1,3 +1,4 @@
+# flask-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -5,10 +6,8 @@ metadata:
   namespace: final
 spec:
   selector:
-    app: mysql
+    app: flask-app
   ports:
-    - protocol: TCP
-      port: 81            # The port on the service
-      targetPort: 81       # The port on the container
-      nodePort: 30080      # The NodePort exposed on the node
-  type: NodePort
+    - port: 81
+      targetPort: 81
+  type: LoadBalancer
