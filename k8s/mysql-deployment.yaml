@@ -17,7 +17,7 @@ spec:
         - name: ecr-secret  # Ensure this secret exists for accessing your ECR repository
       containers:
         - name: mysql
-          image: 345771349539.dkr.ecr.us-east-1.amazonaws.com/clo835-final-project-mysql:latest
+          image: 903150814166.dkr.ecr.us-east-1.amazonaws.com/clo835-final-project-mysql:latest
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
