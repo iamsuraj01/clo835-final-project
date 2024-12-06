@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: final
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      imagePullSecrets:
+        - name: ecr-secret  # Ensure this secret exists for accessing your ECR repository
+      containers:
+        - name: mysql
+          image: 903150814166.dkr.ecr.us-east-1.amazonaws.com/clo835-final-project-mysql:latest
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret  # Reference to the mysql-secret
+                  key: MYSQL_ROOT_PASSWORD  # The key in the secret for the root password
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql  # Mount the persistent volume here
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-pvc  

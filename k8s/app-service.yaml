@@ -1,0 +1,13 @@
+# flask-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service
+  namespace: final
+spec:
+  selector:
+    app: flask-app
+  ports:
+    - port: 81
+      targetPort: 81
+  type: LoadBalancer

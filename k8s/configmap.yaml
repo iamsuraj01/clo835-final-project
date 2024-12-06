@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: final
+data:
+  # Background Image Configuration
+  S3_BUCKET_NAME: "clo835-final-project-background-images-793xbxc0"
+  BACKGROUND_IMAGE: "Resource_Histogram_Project.png"
+  DEVELOPER_NAME: "Suraj, krishna, Bhupendra"
+  
+  # Add AWS Region if needed
+  AWS_REGION: "us-east-1"

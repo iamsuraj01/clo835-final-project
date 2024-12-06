@@ -5,7 +5,9 @@
 	<style>
         body {
             background-image: url('{{ background_image }}');
-            background-size: cover;
+            background-size: contain;
+    		background-repeat: no-repeat; /* Prevents tiling */
+    		background-position: center;
         }
     </style>
 </head>
