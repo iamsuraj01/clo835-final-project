@@ -8,6 +8,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: gp2  
-  hostPath:
-    path: /mnt/data/mysql  
+  storageClassName: gp2
+  awsElasticBlockStore:
+    volumeID:  vol-012a12f5d38071ae4
+    fsType: ext4

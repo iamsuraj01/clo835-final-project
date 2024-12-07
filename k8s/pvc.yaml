@@ -10,3 +10,4 @@ spec:
     requests:
       storage: 2Gi
   storageClassName: gp2
+  volumeName: mysql-pv
